@@ -32,15 +32,6 @@ report 50100 "BriStiMaCo Sales Invoice"
                 calcfields(Picture);
             end;
         }
-        dataitem("Bank Account"; "Bank Account")
-        {
-            column(BankAccount_Name; Name)
-            { }
-            column(BankAcount_IBAN; IBAN)
-            { }
-            column(BankAccount_SWIFT; "SWIFT Code")
-            { }
-        }
         dataitem(Document; "Sales Invoice Header")
         {
             column(Document_No; "No.")
@@ -74,6 +65,8 @@ report 50100 "BriStiMaCo Sales Invoice"
                 DataItemLink = "Document No." = field("No.");
 
                 column(Lines_LineNo; "Line No.")
+                { }
+                column(Lines_Comment; ReturnCommentLine(Lines))
                 { }
                 column(Lines_No; "No.")
                 { }
@@ -140,7 +133,7 @@ report 50100 "BriStiMaCo Sales Invoice"
 
     local procedure ReturnVATAmount(SalesInvoiceHeader: record "Sales Invoice Header"): Decimal
     begin
-        exit(ReturnAmountInclVAT(SalesInvoiceHeader) - ReturnAmountInclVAT(SalesInvoiceHeader));
+        exit(ReturnAmountInclVAT(SalesInvoiceHeader) - ReturnAmountExclVAT(SalesInvoiceHeader));
     end;
 
     local procedure GetInvoiceLines(SalesInvoiceHeader: record "Sales Invoice Header"; var SalesInvoiceLine: record "Sales Invoice Line"): Boolean
@@ -148,5 +141,12 @@ report 50100 "BriStiMaCo Sales Invoice"
         SalesInvoiceLine.Reset();
         SalesInvoiceLine.setrange("Document No.", SalesInvoiceHeader."No.");
         exit(SalesInvoiceLine.findset());
+    end;
+
+    local procedure ReturnCommentLine(SalesInvoiceLine: Record "Sales Invoice Line"): Integer
+    begin
+        if (SalesInvoiceLine."No." = '') then
+            exit(1);
+        exit(0);
     end;
 }
