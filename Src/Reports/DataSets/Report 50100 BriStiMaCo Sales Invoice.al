@@ -8,6 +8,8 @@ report 50100 "BriStiMaCo Sales Invoice"
     {
         dataitem("Company Information"; "Company Information")
         {
+            DataItemTableView = sorting("Primary Key");
+
             column(Company_Picture; Picture)
             { }
             column(Company_Name; Name)
@@ -63,6 +65,7 @@ report 50100 "BriStiMaCo Sales Invoice"
             {
                 DataItemLinkReference = document;
                 DataItemLink = "Document No." = field("No.");
+                DataItemTableView = sorting("document no.", "Line No.");
 
                 column(Lines_LineNo; "Line No.")
                 { }
