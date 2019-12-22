@@ -1,38 +1,20 @@
 pageextension 50102 "Posted Sales Invoice" extends "Posted Sales Invoice"
 {
-    layout
+    actions
     {
-        modify("Sell-to Contact")
+        addlast(Correct)
         {
-            Importance = Additional;
-        }
-        modify("Currency Code")
-        {
-            Importance = Additional;
-        }        
-        modify("EU 3-Party Trade")
-        {
-            Importance = Additional;
-        }
-        modify("Shortcut Dimension 1 Code")
-        {         
-            Importance = Additional;    
-        }
-        modify("Shortcut Dimension 2 Code")
-        {
-            Importance = Additional;
-        }
-        modify("Payment Discount %")
-        {
-            Importance = Additional;
-        }
-        modify("Direct Debit Mandate ID")
-        {
-            Importance = Additional;
-        }
-        modify("Foreign Trade")
-        {
-            Visible =false;
+            action(ChangePostingDate)
+            {
+                Caption = 'Boekingsdatum aanpassen';
+                ApplicationArea = all;
+                Image = ChangeDate;
+
+                trigger OnAction()
+                begin
+                    ChangePostingDate();
+                end;
+            }
         }
     }
 }
