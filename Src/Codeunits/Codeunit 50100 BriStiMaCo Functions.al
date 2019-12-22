@@ -1,6 +1,6 @@
 codeunit 50100 "BriStiMaCo Functions"
 {
-    Permissions = tabledata 17 = rimd, tabledata 21 = rimd, tabledata 254 = rimd, tabledata 379 = rimd, tabledata 5802 = rimd;
+    Permissions = tabledata 17 = rimd, tabledata 21 = rimd, tabledata 254 = rimd, tabledata 379 = rimd, tabledata 5802 = rimd, tabledata 112 = rimd;
 
     procedure ChangePostingDate(var SalesInvoiceHeader: record "Sales Invoice Header")
     var
