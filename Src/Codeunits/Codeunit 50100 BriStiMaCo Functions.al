@@ -15,7 +15,6 @@ codeunit 50100 "BriStiMaCo Functions"
         if not confirm(strsubstno('De boekingsdatum zal worden aangepast naar %1', WorkDate())) then
             exit;
 
-
         PaymentTerms.reset();
         PaymentTerms.get(SalesInvoiceHeader."Payment Terms Code");
         newDueDate := calcdate(PaymentTerms."Due Date Calculation", WorkDate());
